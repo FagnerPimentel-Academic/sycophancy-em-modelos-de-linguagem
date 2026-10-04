@@ -1,0 +1,49 @@
+services:
+
+  # A ficha catalográfica e a ata são incluídas no principal (\includepdf),
+  # então precisam existir antes dele.
+  ficha:
+    build:
+      context: .
+    volumes:
+      - ../output:/output
+      - ../tex:/tex
+      - ./build/ficha:/build
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /texpdf.sh ficha
+
+  ata:
+    build:
+      context: .
+    volumes:
+      - ../output:/output
+      - ../tex:/tex
+      - ./build/ata:/build
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /texpdf.sh ata
+
+  principal:
+    build:
+      context: .
+    depends_on:
+      ficha:
+        condition: service_completed_successfully
+      ata:
+        condition: service_completed_successfully
+    volumes:
+      - ../output:/output
+      - ../tex:/tex
+      - ./build/principal:/build
+    stdin_open: true
+    tty: true
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /texpdf.sh principal

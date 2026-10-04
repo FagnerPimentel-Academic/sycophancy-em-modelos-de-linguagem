@@ -1,0 +1,79 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Ficha catalográfica (modelo), no formato do gerador da biblioteca da FEI
+%%  (https://ficha.fei.edu.br/ficha/). Os dados vêm do arquivo *Texto/info.tex*.
+%%  Quando receber a ficha oficial, copie-a para output/ficha.pdf e remova o
+%%  serviço "ficha" do docker-compose.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{mathptmx}
+\usepackage[scaled]{helvet}
+\usepackage{etoolbox}
+\usepackage[a4paper,margin=2cm]{geometry}
+
+\newcommand{\todo}[2][]{} % ignora os lembretes do info.tex
+
+\makeatletter
+% --- lista de palavras-chave acumulada a partir do info.tex ---
+\newcount\fichaNP \fichaNP=0
+\newcommand{\fichaPalavra}[1]{\advance\fichaNP by 1
+  \expandafter\gdef\csname fichaP\the\fichaNP\endcsname{#1}}
+\input{Texto/info}
+\input{processamento}
+\expandafter\forcsvlist\expandafter\fichaPalavra\expandafter{\listaPalavrasChave}
+
+% --- autores: "Nome Sobrenome, Nome Sobrenome" ---
+\newcount\fichaI
+\newcommand{\fichaAutoresDiretos}{\fichaI=1 \fichaAutoresLoop}
+\def\fichaAutoresLoop{\ifnum\fichaI>\numAutores\else
+  \ifnum\fichaI>1 , \fi
+  \csname autor\the\fichaI n\endcsname\ \csname autor\the\fichaI s\endcsname
+  \advance\fichaI by 1 \expandafter\fichaAutoresLoop\fi}
+% --- assuntos: "1. a. 2. b." ---
+\newcommand{\fichaAssuntos}{\fichaI=1 \fichaAssuntosLoop}
+\def\fichaAssuntosLoop{\ifnum\fichaI>\fichaNP\else
+  \ifnum\fichaI>1 \ \fi
+  \the\fichaI. \csname fichaP\the\fichaI\endcsname.%
+  \advance\fichaI by 1 \expandafter\fichaAssuntosLoop\fi}
+% --- entradas secundárias: "I. Sobrenome, Nome. II. ..." (coautores, orientador, título) ---
+\newcounter{fichaE}
+\newcommand{\fichaEntrada}[1]{\stepcounter{fichaE}\Roman{fichaE}. #1}
+\newcommand{\fichaEntradasAutores}{\fichaI=2 \fichaEntradasLoop}
+\def\fichaEntradasLoop{\ifnum\fichaI>\numAutores\else
+  \fichaEntrada{\csname autor\the\fichaI s\endcsname, \csname autor\the\fichaI n\endcsname.} %
+  \advance\fichaI by 1 \expandafter\fichaEntradasLoop\fi}
+
+\newcommand{\fichaPapel}[2]{#1\ifdefempty{#2}{}{a}}
+
+\ifdefstring{\fichaFonte}{Arial}{\renewcommand{\familydefault}{\sfdefault}}{}
+\newcommand{\fichaTexto}{\ifdefstring{\fichaTamanho}{9}{\fontsize{9}{11}}{\fontsize{10}{12}}\selectfont}
+\makeatother
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+\begin{document}
+\mbox{}\vfill
+\begin{center}
+  \fbox{\begin{minipage}[t][7.5cm][t]{12.5cm}
+    \fichaTexto
+    \vspace{0.4cm}
+    \hspace*{0.5cm}\begin{minipage}{11.5cm}
+      \csname autor1s\endcsname, \csname autor1n\endcsname.\par
+      \hspace*{0.5cm}\titulo\ifdefempty{\sub}{}{: \sub} / \fichaAutoresDiretos. \fichaCidade, \ano.\par
+      \hspace*{0.5cm}\fichaNumero\ \ifdefstring{\fichaContagem}{p}{p.}{f.}\ifdefempty{\fichaIlustracoes}{}{ : il.}\par
+      \vspace{0.5cm}
+      \hspace*{0.5cm}\fichaTipo\ - Centro Universitário FEI.\par
+      \hspace*{0.5cm}\fichaPapel{Orientador}{\orientadorGenero}: \orientador.\par
+      \ifdefempty{\coorientadorNome}{}{\hspace*{0.5cm}\fichaPapel{Coorientador}{\coorientadorGenero}: \tratamentoProf{\coorientadorTitulo}{\coorientadorGenero}\coorientadorNome\ \coorientadorSobrenome.\par}
+      \vspace{0.8cm}
+      \hspace*{0.5cm}\fichaAssuntos\ \fichaEntradasAutores
+      \fichaEntrada{\orientadorSobrenome, \orientadorNome, orient.} \fichaEntrada{Título.}
+    \end{minipage}
+  \end{minipage}}\\[2pt]
+  {\small Elaborada pelo sistema de geração automática de ficha catalográfica da FEI\\
+  com os dados fornecidos pelo(a) autor(a).}
+\end{center}
+\end{document}

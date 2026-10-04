@@ -1,0 +1,23 @@
+name: Build LaTeX
+
+on:
+  push:
+  pull_request:
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: build with docker
+        working-directory: latex/.devcontainer
+        run: docker compose up
+
+      - name: Upload output
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: output
+          path: latex/output/*

@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  ** NÃO ALTERAR ESTE ARQUIVO **
+%%  Processamento dos dados do *Texto/info.tex*: aqui ficam os valores derivados
+%%  (nomes completos, título conferido, descrição etc.). Os alunos editam
+%%  apenas o Texto/info.tex. Carregado por principal.tex, ata.tex e ficha.tex,
+%%  sempre logo depois de \input{Texto/info}.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{etoolbox}
+
+% --- Autores: \alunos ("Nome Sobrenome \\ Nome Sobrenome") a partir de \autores ---
+% Também guarda cada autor (\autorKn = nome, \autorKs = sobrenome) e o total (\numAutores),
+% que a ficha catalográfica usa.
+\newcount\numAutores \numAutores=0
+\def\alunos{}
+\newcommand{\autor}[2]{\advance\numAutores by 1
+  \expandafter\gdef\csname autor\the\numAutores n\endcsname{#1}%
+  \expandafter\gdef\csname autor\the\numAutores s\endcsname{#2}%
+  \ifnum\numAutores>1 \appto\alunos{\\}\fi
+  \appto\alunos{#1 #2}}
+\autores
+\appto\alunos{\\} % termina com quebra de linha, como esperado pela capa e pela ata
+
+% --- Banca: \assinaturasBanca (uma linha de assinatura por membro) a partir de \banca ---
+\def\assinaturasBanca{}
+\newcommand{\membroBanca}[1]{\appto\assinaturasBanca{\hrulefill \\ #1\par\vspace*{0.05\textheight}}}
+\banca
+
+% --- Orientador: "Prof.ª Dra. ", "Prof. Me. " e nome completo ---
+\newcommand{\tratamentoProf}[2]{Prof.\ifdefempty{#2}{}{\textordfeminine}\ %
+  \ifdefstring{#1}{Dr}{\ifdefempty{#2}{Dr.}{Dra.}\ }{%
+  \ifdefstring{#1}{Me}{\ifdefempty{#2}{Me.}{Ma.}\ }{}}}
+\newcommand{\orientador}{\tratamentoProf{\orientadorTitulo}{\orientadorGenero}\orientadorNome\ \orientadorSobrenome}
+
+% --- Derivados de \tipo: título conferido (\diploma) e tipo na ficha (\fichaTipo) ---
+\ifdefstring{\tipo}{Mestrado}
+  {\newcommand{\diploma}{Mestre}\newcommand{\fichaTipo}{Dissertação}}
+  {\ifdefstring{\tipo}{Doutorado}
+    {\newcommand{\diploma}{Doutor}\newcommand{\fichaTipo}{Tese}}
+    {\ifdefstring{\tipo}{Iniciação Científica}
+      {\newcommand{\diploma}{}\newcommand{\fichaTipo}{Iniciação Científica}}
+      {\newcommand{\diploma}{Bacharel}\newcommand{\fichaTipo}{Trabalho de Conclusão de Curso}}}}
+
+% --- Texto da folha de rosto e da ata ---
+% Iniciação Científica não tem a parte "como parte dos requisitos... título de ... em ...".
+\ifdefstring{\tipo}{Iniciação Científica}
+  {\newcommand{\descricao}{Trabalho de \tipo~ apresentado ao Centro Universitário FEI. Orientad\ifdefempty{\orientadorGenero}{o}{a} por \orientador.}}
+  {\newcommand{\descricao}{Trabalho de \tipo~ apresentado ao Centro Universitário FEI, como parte dos requisitos necessários para obtenção do título de \diploma~ em \Curso . Orientad\ifdefempty{\orientadorGenero}{o}{a} por \orientador.}}
+
+% --- Palavras-chave do resumo: "A; B; C" a partir de \listaPalavrasChave ---
+\newcommand{\palavraItem}[1]{\palavraSep #1\gdef\palavraSep{; }}
+\newcommand{\palavrasChaveResumo}{\gdef\palavraSep{}\expandafter\forcsvlist\expandafter\palavraItem\expandafter{\listaPalavrasChave}}
