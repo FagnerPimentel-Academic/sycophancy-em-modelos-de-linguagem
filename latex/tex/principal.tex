@@ -4,7 +4,7 @@
 %%            description: Modelo de trabalhos acadêmicos
 %%
 %%                  **  NÂO ALTERAR ESTE ARQUIVO **
-%%       No arquivo *Texto/info.tex* selecione a fase atual do seu trabalho.
+%%       Nos arquivos da pasta *info/* (trabalho.tex) selecione a fase atual do seu trabalho.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass[deposito]{fei}
 
@@ -14,7 +14,7 @@
 \usepackage{hyperref}
 
 \addbibresource{Texto/referencias.bib}
-\input{Texto/info.tex}
+\input{info/info}
 \input{processamento.tex}
 
 % \usepackage[utf8]{inputenc}
@@ -41,9 +41,9 @@
 \author{\alunos}
 
 \title{\titulo}
-\subtitulo{\\\sub}
+\ifdefempty{\sub}{}{\subtitulo{\\\sub}} % sem subtítulo, sem ":" na capa
 
-\input{Texto/glossaries}
+\input{pretextuais/glossario}
 
 \makeindex
 \makeglossaries
@@ -62,9 +62,9 @@
     \tableofcontents
     \fichacatalografica
     \folhadeaprovacao
-    \input{Texto/dedicatoria}
-    \input{Texto/agradecimentos}
-    \input{Texto/epigrafe}
+    \input{pretextuais/dedicatoria}
+    \input{pretextuais/agradecimentos}
+    \input{pretextuais/epigrafe}
     \listoffigures
     \listoftables
     \listofalgorithms
@@ -75,7 +75,7 @@
 }
 
 \begin{resumo}
-    \input{Texto/resumo}
+    \input{pretextuais/resumo}
     \palavraschave{\palavrasChaveResumo}
 \end{resumo}
 

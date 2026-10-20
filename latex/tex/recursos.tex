@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage[colorinlistoftodos,textsize=tiny]{todonotes}
+
+\input{info/info}
+\input{processamento}
+\input{recursosComum}
+\providecommand{\cidade}{São Bernardo do Campo}
+
+\begin{document}
+
+  \thispagestyle{empty}
+  \begin{center}
+    \uppercase\expandafter{\alunos}
+
+    \vfill
+
+    \textbf{\MakeUppercase{\titulo}}
+
+    \vfill
+
+    \textbf{Lista de recursos}
+
+    \vfill
+
+    \begin{flushright}
+      \begin{minipage}{6cm}
+        \normalsize
+        \descricao
+      \end{minipage}
+    \end{flushright}
+
+    \vfill
+
+    \cidade\\[0.5em]
+    \ano
+
+  \end{center}%
+  \clearpage
+
+  \small
+
+  \small
+
+  \tabelasRecursos{\section*}
+
+  \resumoRecursos{\section*}
+
+\end{document}

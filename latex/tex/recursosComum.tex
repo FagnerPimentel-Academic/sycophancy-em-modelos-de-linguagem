@@ -1,0 +1,124 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  ** NÃO ALTERAR ESTE ARQUIVO **
+%%  Pacotes, comandos e tabelas dos recursos do projeto (pasta recursos/).
+%%  Carregado por recursos.tex e etica.tex.
+%%  \tabelasRecursos{<seção>} imprime as tabelas (ex.: \tabelasRecursos{\section*});
+%%  \resumoRecursos{<seção>} imprime o resumo com o total geral.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{xfp}
+\RequirePackage{siunitx}
+\RequirePackage{longtable}
+\RequirePackage{array}
+\RequirePackage{booktabs}
+\RequirePackage{url}
+\RequirePackage[hidelinks]{hyperref}
+
+\input{recursos/materiais}
+\input{recursos/outros}
+\input{recursos/servicosInternos}
+\input{recursos/servicosExternos}
+
+% Valor em reais com vírgula decimal: 1234.5 -> R$ 1.234,50
+\sisetup{round-mode=places,round-precision=2,output-decimal-marker={,},group-separator={.},group-minimum-digits=4}
+% Tabelas ocupam toda a largura do texto
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+\newcommand{\moeda}[1]{R\$\,\num{\fpeval{#1}}}
+
+% Cada categoria tem seu contador e seu total (\total<Categoria>), somados em \totalGeral.
+\def\totalGeral{0}
+\newcommand{\somaTotal}[2]{%
+  \xdef#1{\fpeval{#1+#2}}%
+  \xdef\totalGeral{\fpeval{\totalGeral+#2}}}
+
+\newcounter{itemMaterial}
+\def\totalMateriais{0}
+\newcommand{\material}[4]{%
+  \stepcounter{itemMaterial}%
+  \xdef\subtotalItem{\fpeval{#2*#3}}%
+  \somaTotal{\totalMateriais}{\subtotalItem}%
+  \theitemMaterial & #1 & \href{#4}{\nolinkurl{#4}} & #2 & \moeda{#3} & \moeda{\subtotalItem} \\}
+
+\newcounter{itemOutro}
+\def\totalOutros{0}
+\newcommand{\outro}[2]{%
+  \stepcounter{itemOutro}%
+  \somaTotal{\totalOutros}{#2}%
+  \theitemOutro & #1 & \moeda{#2} \\}
+
+\newcounter{itemServicoInterno}
+\def\totalServicosInternos{0}
+\newcommand{\servicoInterno}[3]{%
+  \stepcounter{itemServicoInterno}%
+  \xdef\subtotalItem{\fpeval{#2*#3}}%
+  \somaTotal{\totalServicosInternos}{\subtotalItem}%
+  \theitemServicoInterno & #1 & \num[round-mode=none]{#2} & \moeda{#3} & \moeda{\subtotalItem} \\}
+
+\newcounter{itemServicoExterno}
+\def\totalServicosExternos{0}
+\newcommand{\servicoExterno}[3]{%
+  \stepcounter{itemServicoExterno}%
+  \somaTotal{\totalServicosExternos}{#3}%
+  \theitemServicoExterno & #1 & #2 & \moeda{#3} \\}
+
+\newcommand{\tabelasRecursos}[1]{%
+  #1{Materiais}
+  \begin{longtable}{@{\extracolsep{\fill}}r p{0.28\textwidth} p{0.25\textwidth} r r r@{}}
+    \toprule
+    \textbf{\#} & \textbf{Descrição} & \textbf{Link de compra} & \textbf{Qtd.} & \textbf{Valor unit.} & \textbf{Subtotal} \\
+    \midrule
+    \endhead
+    \listaMateriais
+    \midrule
+    \multicolumn{5}{@{}l}{\textbf{Total}} & \textbf{\moeda{\totalMateriais}} \\
+    \bottomrule
+  \end{longtable}
+
+  #1{Serviços internos}
+  \begin{longtable}{@{\extracolsep{\fill}}r p{0.45\textwidth} r r r@{}}
+    \toprule
+    \textbf{\#} & \textbf{Descrição} & \textbf{Horas} & \textbf{Valor/hora} & \textbf{Subtotal} \\
+    \midrule
+    \endhead
+    \listaServicosInternos
+    \midrule
+    \multicolumn{4}{@{}l}{\textbf{Total}} & \textbf{\moeda{\totalServicosInternos}} \\
+    \bottomrule
+  \end{longtable}
+
+  #1{Serviços externos}
+  \begin{longtable}{@{\extracolsep{\fill}}r p{0.45\textwidth} l r@{}}
+    \toprule
+    \textbf{\#} & \textbf{Fornecedor} & \textbf{Data} & \textbf{Valor} \\
+    \midrule
+    \endhead
+    \listaServicosExternos
+    \midrule
+    \multicolumn{3}{@{}l}{\textbf{Total}} & \textbf{\moeda{\totalServicosExternos}} \\
+    \bottomrule
+  \end{longtable}
+
+  #1{Outros}
+  \begin{longtable}{@{\extracolsep{\fill}}r p{0.7\textwidth} r@{}}
+    \toprule
+    \textbf{\#} & \textbf{Descrição} & \textbf{Valor} \\
+    \midrule
+    \endhead
+    \listaOutros
+    \midrule
+    \multicolumn{2}{@{}l}{\textbf{Total}} & \textbf{\moeda{\totalOutros}} \\
+    \bottomrule
+  \end{longtable}}
+
+\newcommand{\resumoRecursos}[1]{%
+  #1{Resumo de valores}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}l r@{}}
+    \toprule
+    Materiais & \moeda{\totalMateriais} \\
+    Serviços internos & \moeda{\totalServicosInternos} \\
+    Serviços externos & \moeda{\totalServicosExternos} \\
+    Outros & \moeda{\totalOutros} \\
+    \midrule
+    \textbf{Total geral} & \textbf{\moeda{\totalGeral}} \\
+    \bottomrule
+  \end{tabular*}}

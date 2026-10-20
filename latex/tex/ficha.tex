@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  Ficha catalográfica (modelo), no formato do gerador da biblioteca da FEI
-%%  (https://ficha.fei.edu.br/ficha/). Os dados vêm do arquivo *Texto/info.tex*.
+%%  (https://ficha.fei.edu.br/ficha/). Os dados vêm dos arquivos da pasta *info/*.
 %%  Quando receber a ficha oficial, copie-a para output/ficha.pdf e remova o
 %%  serviço "ficha" do docker-compose.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -13,14 +13,14 @@
 \usepackage{etoolbox}
 \usepackage[a4paper,margin=2cm]{geometry}
 
-\newcommand{\todo}[2][]{} % ignora os lembretes do info.tex
+\newcommand{\todo}[2][]{} % ignora os lembretes dos arquivos de info/
 
 \makeatletter
-% --- lista de palavras-chave acumulada a partir do info.tex ---
+% --- lista de palavras-chave acumulada a partir dos arquivos de info/ ---
 \newcount\fichaNP \fichaNP=0
 \newcommand{\fichaPalavra}[1]{\advance\fichaNP by 1
   \expandafter\gdef\csname fichaP\the\fichaNP\endcsname{#1}}
-\input{Texto/info}
+\input{info/info}
 \input{processamento}
 \expandafter\forcsvlist\expandafter\fichaPalavra\expandafter{\listaPalavrasChave}
 

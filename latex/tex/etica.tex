@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage[colorinlistoftodos,textsize=tiny]{todonotes}
+
+\input{info/info}
+\input{processamento}
+\input{recursosComum}
+\input{etica/pesquisa}
+\providecommand{\cidade}{São Bernardo do Campo}
+
+\begin{document}
+
+  \thispagestyle{empty}
+  \begin{center}
+    \uppercase\expandafter{\alunos}
+
+    \vfill
+
+    \textbf{\MakeUppercase{\titulo}}
+
+    \vfill
+
+    \textbf{Projeto de pesquisa para o Comitê de Ética em Pesquisa\\(Plataforma Brasil)}
+
+    \vfill
+
+    \begin{flushright}
+      \begin{minipage}{6cm}
+        \normalsize
+        \descricao
+      \end{minipage}
+    \end{flushright}
+
+    \vfill
+
+    \cidade\\[0.5em]
+    \ano
+
+  \end{center}%
+  \clearpage
+
+  \subsection*{Informações gerais}
+  \begin{tabular}{@{}p{0.36\textwidth} p{0.6\textwidth}@{}}
+    \textbf{Instituição proponente} & \eticaInstituicao \\
+    \textbf{Pesquisador responsável} & \orientador \\
+    \textbf{Departamento} & \departamento \\
+    \textbf{Local da coleta} & \eticaLocalColeta \\
+    \textbf{Público-alvo} & \eticaPublicoAlvo \\
+    \textbf{Nº de participantes} & \eticaNumeroParticipantes \\
+    \textbf{Período da coleta} & \eticaPeriodoColeta \\
+    \textbf{Financiamento} & \eticaFinanciamento \\
+  \end{tabular}
+
+  \bigskip
+  \input{etica/projetoDetalhado}
+
+  \clearpage
+  \input{etica/tcle}
+
+\end{document}

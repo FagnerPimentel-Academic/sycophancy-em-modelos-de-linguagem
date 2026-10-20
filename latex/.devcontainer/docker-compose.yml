@@ -28,6 +28,32 @@ services:
       - |
         /texpdf.sh ata
 
+  recursos:
+    build:
+      context: .
+    volumes:
+      - ../output:/output
+      - ../tex:/tex
+      - ./build/recursos:/build
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /texpdf.sh recursos
+
+  etica:
+    build:
+      context: .
+    volumes:
+      - ../output:/output
+      - ../tex:/tex
+      - ./build/etica:/build
+    command:
+      - /bin/bash
+      - -c
+      - |
+        /texpdf.sh etica
+
   principal:
     build:
       context: .
