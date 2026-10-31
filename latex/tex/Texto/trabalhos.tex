@@ -1,17 +1,40 @@
 \chapter{Trabalhos Relacionados} \label{trabs}
 
-\todo[inline]{
-Aqui deve ser definido o ponto mais atualizado do conhecimento disponível sobre o tema da sua pesquisa. 
-Faça uma análise crítica dos trabalhos encontrados na literatura. Essa análise deve ser uma narração que integra, sintetiza e critica os pensamentos importantes e pesquisa do tema proposto.
-Nessa análise, você deve responder as seguintes perguntas sobre os trabalhos encontrados:
-\\- Quem são os principais autores deste tema?
-\\- O que já foi feito até o momento nessa área? (histórico)
-\\- O que eles utilizam para o desenvolvimento dos trabalhos (materiais)
-\\- Quais são as técnicas utilizadas nestes trabalhos? (métodos)
-\\- Como são realizadas as avaliações desses trabalhos? (métricas)
-\\- Quais são as resultados destes trabalhos? (conclusões)
-\\- Quais são as lacunas no conhecimento? (o que ainda não foi respondido por estes trabalhos)
-\\- Quais as direções futuras? (Quais as tendências de pesquisas sobre neste tema)
-\\ (se achar necessário, construa uma tabela contendo estas informações.) 
-}
+A literatura sobre \textit{sycophancy} em LLMs apresenta abordagens complementares: avaliações comportamentais, investigação da influência de preferências humanas, análise de diálogos com múltiplos turnos e distinção entre correções válidas e sugestões incorretas. Esta seção discute os quatro estudos selecionados como base para o TCC, destacando suas contribuições e os limites de sua aplicação ao recorte proposto.
 
+\section{Descoberta do fenômeno}
+
+\textcite{perez2023discovering} propuseram usar modelos de linguagem para gerar avaliações de diferentes comportamentos. No experimento sobre \textit{sycophancy}, modelos maiores apresentaram maior tendência a reproduzir a posição informada pelo usuário em perguntas de política, filosofia e pesquisa em processamento de linguagem natural. Entretanto, os autores relataram níveis semelhantes desse comportamento entre modelos com diferentes quantidades de etapas de RLHF (\textit{Reinforcement Learning from Human Feedback}), incluindo modelos sem esse ajuste (Seção 4.2, p.~13393). O artigo também investiga outros comportamentos que se agravam com RLHF, mas esse resultado não deve ser generalizado à \textit{sycophancy}. Por abordar diversas tendências comportamentais, o estudo não fornece um protocolo dedicado à capitulação factual sob contestação multi-turno.
+
+\section{Causas ligadas ao alinhamento por preferências}
+
+\textcite{sharma2024towards} avaliaram cinco assistentes de IA em quatro tarefas de geração de texto e verificaram que todos exibiram \textit{sycophancy}. Ao analisar os dados de preferência usados no alinhamento, os autores mostraram que julgamentos humanos e modelos de preferência às vezes favorecem respostas sicofânticas em vez das corretas, o que indica que o próprio processo de otimização por preferências contribui para o fenômeno. O foco do trabalho está na prevalência e nas causas, e não na severidade da falha entre domínios.
+
+\section{Dinâmica em diálogos multi-turno}
+
+\textcite{hong2025measuring} propuseram o SYCON Bench, que avalia 17 LLMs em diálogos com múltiplos turnos nos quais o usuário pressiona o modelo. O trabalho introduz duas métricas: o \textit{Turn of Flip}, que indica em qual turno o modelo muda de posição pela primeira vez, e o \textit{Number of Flip}, que conta quantas vezes ele muda de posição ao longo do diálogo. Os autores também testaram estratégias de mitigação, e uma estratégia baseada em perspectiva de terceira pessoa reduziu a \textit{sycophancy} em até 63,8\% no cenário de debate. Apesar disso, a avaliação não é centrada nas consequências das falhas entre domínios.
+
+\section{Seletividade à correção}
+
+\textcite{sinha2026sycobench} propôs o SycoBench-600, composto por 600 instâncias de múltipla escolha em inglês, derivadas de 272 enunciados normalizados, com três tipos de pressão e avaliação de sete assistentes. A principal contribuição é separar dois comportamentos que costumam ser medidos juntos: aceitar uma correção válida, que é desejável, e ceder a uma sugestão errada, que caracteriza a \textit{sycophancy}. O \textit{benchmark}, porém, usa questões de múltipla escolha em inglês, o que reduz a dinâmica de uma conversa livre.
+
+\section{Síntese e lacuna}
+
+A \autoref{tab:trabalhos} resume os trabalhos apresentados.
+
+\begin{table}[ht]
+\caption{Comparação entre os trabalhos relacionados.}
+\label{tab:trabalhos}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Trabalho} & \textbf{Foco} & \textbf{Contribuição} & \textbf{Lacuna para este trabalho} \\ \hline
+\textcite{perez2023discovering} & Avaliações comportamentais & Modelos maiores tendem a acompanhar posições informadas pelo usuário; a \textit{sycophancy} foi semelhante entre diferentes quantidades de etapas de RLHF. & Não avalia capitulação factual sob contestação em diálogos multi-turno. \\ \hline
+\textcite{sharma2024towards} & RLHF / preferências & Cinco assistentes, quatro tarefas; preferências humanas e modelos de preferência às vezes favorecem respostas sicofânticas. & Foca prevalência e causas, não a severidade entre domínios. \\ \hline
+\textcite{hong2025measuring} & Multi-turno & SYCON Bench com 17 LLMs, \textit{Turn of Flip} e \textit{Number of Flip}; mitigação em 3ª pessoa reduz até 63,8\% no debate. & Não é centrado em consequências entre domínios. \\ \hline
+\textcite{sinha2026sycobench} & Seletividade & SycoBench-600: 600 instâncias sobre 272 enunciados, três tipos de pressão, sete assistentes; separa aceitar correção de ceder à sugestão errada. & Múltipla escolha em inglês; menor dinâmica de conversa livre. \\ \hline
+\end{tabular}
+}
+\end{table}
+
+Os quatro estudos selecionados investigam diferentes aspectos da \textit{sycophancy}, mas não organizam seus experimentos por uma classificação explícita da consequência potencial de respostas incorretas em cada cenário. Como proposta, este TCC pretende examinar capitulação e correção seletiva em cenários de diferentes níveis de criticidade. Essa delimitação se refere aos trabalhos aqui analisados; sua originalidade perante a literatura mais ampla ainda depende de revisão complementar.

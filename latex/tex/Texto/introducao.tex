@@ -1,50 +1,37 @@
 \chapter{INTRODUÇÃO}
 \label{intro}
 
-\todo[inline]{
-Este modelo é baseado na Classe Latex da FEI, uma ferramenta para padronização de textos acadêmicos do Centro Universitário FEI. Mais informações sobre a utilização da classe pode ser encontrado em sua página do Github (\url{https://github.com/douglasrizzo/Classe-Latex-FEI/blob/master/fei.pdf}).
-O livro "Writing for publication" de \textcite{jalongo2016writing} foi utilizado para compor esse material, lá você pode encontrar mais informações sobre como escrever trabalhos acadêmicos. Utilize este modelo para construir o seu trabalho.
-}
+Grandes Modelos de Linguagem (LLMs, do inglês \textit{Large Language Models}) já mediam decisões e a geração de conteúdo em diversas atividades. Para torná-los úteis e cooperativos, esses modelos passam por etapas de alinhamento por preferências, nas quais aprendem a produzir respostas bem avaliadas por pessoas ou por modelos de preferência. Esse processo, porém, pode criar uma tensão entre agradar o usuário e preservar a veracidade da resposta \cite{sharma2024towards}.
 
-\todo[inline, color=blue!20!white]{
-Durante o TCC, o aluno deve:
-\\- Demonstrar sua capacidade de realizar uma pesquisa.
-\\- Aplicar os conhecimentos adquiridos ao longo do curso.
-\\- produzir um trabalho original e relevante na sua área de estudo.
-}
+Um dos comportamentos que surgem dessa tensão é a \textit{sycophancy}: a tendência de o modelo acomodar a crença ou a sugestão do usuário mesmo quando ela é incorreta \cite{perez2023discovering, sharma2024towards}. Em diálogos com múltiplos turnos, a pressão sustentada do usuário, como em ``Tem certeza? Acho que sua resposta está errada.'', pode induzir o modelo a abandonar uma resposta correta e mudar de posição \cite{hong2025measuring}. Diante dessa pressão, o modelo pode resistir, mantendo a evidência e corrigindo a premissa do usuário, ou capitular, mudando de posição e validando uma sugestão sem base.
 
-\todo[inline]{Aqui temos a introdução. Comece apresentando os seguintes itens:
-}
+A motivação deste trabalho está na consequência dessa falha. Em domínios com diferentes níveis de criticidade, a mesma tendência de concordar pode variar de um erro inofensivo a uma orientação potencialmente prejudicial. Além disso, a fluência das respostas de um LLM pode mascarar a falha, já que uma concordância indevida costuma ser apresentada com a mesma segurança de uma resposta correta.
 
+Os quatro trabalhos selecionados como referências abordam avaliações comportamentais, efeitos de preferências humanas, dinâmica multi-turno e aceitação de correções válidas \cite{perez2023discovering, sharma2024towards, hong2025measuring, sinha2026sycobench}. Nesses estudos, a comparação não foi estruturada em torno de níveis de criticidade definidos pela consequência potencial da resposta incorreta em cada cenário. Este trabalho propõe investigar essa dimensão em conjunto com capitulação e correção seletiva. A contribuição pretendida é uma perspectiva de avaliação orientada à criticidade potencial, cuja delimitação perante a literatura mais ampla ainda requer revisão complementar.
 
-\todo[inline]{
-\\- Contextualização:
-Qual a importância do tema?  
-Por que esse trabalho é interessante para o leitor?
-Quais o principais conceitos?
-Quais as principais aplicações?
-\\- Motivação: 
-Quais os fatores que determinam a escolha do tema? 
-Qual a sua relação com o tema?
-\\- Contribuição: 
-Como seu trabalho contribui para a ciência?
-Qual a sua contribuição para o avanço desse tema?
-Qual a inovação que seu trabalho traz?
-}
-
+A pergunta de pesquisa que orienta o trabalho é: quando, como e com que frequência um LLM troca a correção pela concordância, e quão grave pode ser essa falha?
 
 \section{Objetivo}
-\todo[inline]{Quais as questões a serem respondidas? O Objetivo deve ser uma única frase. Deixe claro qual o problema que você pretende responder com a pesquisa, assim como sua delimitação espacial e temporal. Apresente os objetivos em termos claros e precisos, listando possíveis sub-problemas. Utilize verbos de ação como verificar, identificar, descrever e analisar. Se houver hipótese, deixar explicitas as relações da hipotes com as variáveis do problema}
+
+O objetivo geral deste trabalho é quantificar e comparar o comportamento de \textit{sycophancy} em diferentes LLMs sob pressão do usuário, avaliando capitulação, correção seletiva e gravidade potencial das falhas em cenários de diferentes níveis de criticidade.
+
+Para atingir esse objetivo, são definidos os seguintes objetivos específicos:
+
+\begin{itemize}
+    \item \textbf{Definir} um protocolo reproduzível de \textit{prompts} pareados (premissas corretas $\times$ incorretas) e níveis de pressão em diálogos com múltiplos turnos;
+    \item \textbf{Executar} os testes em diferentes LLMs sob configurações padronizadas, registrando respostas e condições experimentais para permitir a comparação;
+    \item \textbf{Mensurar} a taxa de capitulação, o turno da primeira mudança, a frequência de mudanças e a correção seletiva diante de sugestões válidas e inválidas;
+    \item \textbf{Comparar} modelos, domínios e níveis de criticidade, relacionando a frequência de capitulação à gravidade potencial da resposta incorreta e identificando os cenários de maior risco.
+\end{itemize}
 
 \section{Estrutura do Trabalho}
-\todo[inline]{O que o leitor irá encontrar nas próximas sessões}
 
-O restante deste trabalho é dividido da seguinte maneira: 
+O restante deste trabalho é dividido da seguinte maneira:
 
-No capítulo 2, serão apresentados todos os conceitos utilizados e relacionados ao tema abordado, para que o leitor possa entender com clareza as técnicas que estão sendo tratadas no trabalho e compreender os termos que serão descritos posteriormente.
+No capítulo 2, são apresentados os conceitos utilizados ao longo do trabalho, para que o leitor compreenda os termos e as técnicas tratados nos capítulos seguintes.
 
-No capítulo 3, serão descritos trabalhos relacionados disponíveis na literatura, com o objetivo de apresentar o cenário atual de pesquisa da área.
- 
-O capítulo 4 detalhará a metodologia que será utilizada para o desenvolvimento deste trabalho, demonstrando as técnicas que serão utilizadas e os passos a serem realizados para atingir o objetivo final.
+No capítulo 3, são descritos os trabalhos relacionados disponíveis na literatura, com o objetivo de apresentar o cenário atual de pesquisa sobre \textit{sycophancy} em LLMs e a lacuna explorada por este trabalho.
 
-O capítulo 5 irá expor o que os autores deste trabalho esperam ao longo do desenvolvimento e após a implementação da metodologia proposta.
+O capítulo 4 detalha a metodologia proposta, com os materiais, as etapas do protocolo experimental e as métricas utilizadas para atingir o objetivo final.
+
+O capítulo 5 apresenta o cronograma das atividades previstas para a continuação do trabalho.
