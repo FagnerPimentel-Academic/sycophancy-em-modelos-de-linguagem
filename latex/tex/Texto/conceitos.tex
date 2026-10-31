@@ -1,14 +1,45 @@
 \chapter{CONCEITOS FUNDAMENTAIS} \label{conceitos}
 
-\todo[inline]{
-Neste capítulo você deve apresentar os principais conceitos que serão utilizados ao longo do trabalho. Comece descrevendo as palavras chaves que você utilizou no resumo deste trabalho. Em seguida descreva quais são os conceitos utilizados pelos autores que você encontrou na sessão dos trabalhos relacionados, caso estes conceitos já não estejam entre suas palavras chaves. Para cada conceito, defina:
-\\- O que é?
-\\- Quem definiu pela primeira vez?
-\\- Para que serve?
-\\- Quais as limitações?
-}
+Este capítulo apresenta os conceitos usados ao longo do trabalho, a partir das palavras-chave do resumo e dos termos empregados nos trabalhos relacionados. Para cada conceito, são apresentados sua definição, sua origem, sua finalidade e suas limitações.
 
-\section{Conceito 1\todo{alterar}}
-\section{Conceito 2\todo{alterar}}
-\section{Conceito 3\todo{alterar}}
-\section{Conceito 4\todo{alterar}}
+\section{Grandes Modelos de Linguagem}
+
+Grandes Modelos de Linguagem (LLMs) são modelos treinados em grandes volumes de texto para gerar respostas em linguagem natural. A base da maioria desses modelos é a arquitetura Transformer, proposta por \textcite{vaswani2017attention}, que usa mecanismos de atenção para relacionar as palavras de um texto. \textcite{brown2020language} mostraram, com o GPT-3, que ampliar a escala desses modelos permite que eles resolvam tarefas variadas a partir de poucas instruções ou exemplos.
+
+Hoje os LLMs já mediam decisões e a geração de conteúdo em diversas atividades. Sua principal limitação, para este trabalho, é que eles geram texto fluente sem verificar fatos: uma resposta bem escrita não é, necessariamente, uma resposta correta, e o modelo pode apresentar informações falsas com a mesma segurança de informações verdadeiras.
+
+\section{Alinhamento por preferências}
+
+O alinhamento por preferências é a etapa em que o modelo é ajustado para produzir respostas bem avaliadas por pessoas ou por modelos de preferência. A técnica mais conhecida é o RLHF (\textit{Reinforcement Learning from Human Feedback}), proposta por \textcite{christiano2017deep} e aplicada a modelos de linguagem por \textcite{ouyang2022training}, que a usaram para fazer o modelo seguir instruções de forma útil e cooperativa.
+
+A limitação dessa técnica é que ela otimiza o que os avaliadores preferem, e não necessariamente o que é verdadeiro. Como as avaliações às vezes favorecem respostas que concordam com o usuário em vez de respostas corretas, o processo pode criar uma tensão entre agradar o usuário e preservar a veracidade \cite{sharma2024towards}.
+
+\section{Sycophancy}
+
+\textit{Sycophancy} é a tendência de um modelo acomodar a crença ou a sugestão do usuário mesmo quando ela é incorreta. \textcite{perez2023discovering} fizeram uma das primeiras medições sistemáticas do fenômeno em LLMs, e \textcite{sharma2024towards} o relacionaram ao alinhamento por preferências. Em diálogos com múltiplos turnos, a pressão sustentada do usuário pode levar o modelo a abandonar uma resposta correta e mudar de posição \cite{hong2025measuring}.
+
+Medir a \textit{sycophancy} serve para avaliar a confiabilidade de um modelo quando o usuário discorda dele. A principal limitação do conceito é que nem toda mudança de posição é sicofântica: se o usuário aponta um erro real, mudar de resposta é o comportamento correto. Por isso, o fenômeno precisa ser medido junto com a correção seletiva.
+
+\section{Capitulação e resistência}
+
+Diante da pressão do usuário, o modelo pode ter dois comportamentos. Ele \textbf{resiste} quando mantém a evidência e corrige a premissa incorreta do usuário. Ele \textbf{capitula} quando muda de posição e valida a sugestão sem base. \textcite{hong2025measuring} caracterizaram a capitulação em diálogos multi-turno pelo turno em que ocorre a primeira mudança de posição (\textit{Turn of Flip}) e pelo número de mudanças ao longo do diálogo (\textit{Number of Flip}).
+
+Essas medidas mostram não só se o modelo cede, mas quanto tempo ele resiste. Sua limitação é depender do critério usado para decidir o que conta como mudança de posição, especialmente quando o modelo responde de forma ambígua.
+
+\section{Correção seletiva}
+
+A correção seletiva é a capacidade de o modelo aceitar sugestões válidas e rejeitar sugestões inválidas, separando a correção legítima da cessão indevida à pressão. \textcite{sinha2026sycobench} propôs medir esses dois comportamentos separadamente, já que um modelo que nunca muda de posição não é sicofântico, mas também não aceita correções.
+
+Para ser medida, a correção seletiva exige saber com certeza qual é a resposta correta de cada questão, o que limita sua aplicação a perguntas com resposta objetiva e verificável.
+
+\section{Criticidade e gravidade potencial}
+
+A criticidade indica o potencial de dano de uma resposta incorreta em um determinado domínio. A mesma concordância indevida pode ser um erro inofensivo em um domínio e uma orientação potencialmente prejudicial em outro. Neste trabalho, propõe-se uma definição própria de criticidade, inspirada na noção de gravidade usada em matrizes de risco. A classificação abaixo é preliminar e depende da avaliação do grupo e do orientador, conforme discutido na metodologia:
+
+\begin{itemize}
+    \item \textbf{Baixa}: o erro é inofensivo (por exemplo, conhecimentos gerais);
+    \item \textbf{Média}: o erro pode causar prejuízo financeiro ou de direitos (por exemplo, finanças pessoais);
+    \item \textbf{Alta}: o erro pode causar risco físico (por exemplo, saúde e segurança).
+\end{itemize}
+
+A limitação dessa classificação é ser subjetiva. Para reduzir esse efeito, propõe-se que dois integrantes revisem, de forma independente, a criticidade de cada cenário e discutam as divergências. Esse procedimento ainda depende de aprovação; a classificação não deve ser determinada apenas pelo domínio.
