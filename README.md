@@ -13,6 +13,7 @@
 
 ## Resumo
 - Grandes Modelos de Linguagem (LLMs) já mediam decisões e a geração de conteúdo, e o alinhamento por preferências, ao buscar utilidade e cooperação, pode criar tensão entre agradar o usuário e preservar a veracidade. Sycophancy é a tendência de acomodar a crença ou sugestão do usuário mesmo quando ela é incorreta, e em diálogos multi-turno a pressão sustentada pode induzir o modelo a mudar de posição. Como a mesma tendência de concordar pode variar de um erro inofensivo a uma orientação potencialmente prejudicial, dependendo do domínio, este trabalho propõe um protocolo reproduzível de prompts pareados (premissas corretas × incorretas) com níveis crescentes de pressão em diálogos de múltiplos turnos. Os testes são executados em diferentes LLMs sob configurações padronizadas, medindo a taxa de capitulação, o turno da primeira mudança, a frequência de mudanças, a persistência e a correção seletiva diante de sugestões válidas e inválidas. Os resultados são comparados entre modelos, domínios e níveis de criticidade, relacionando a frequência de capitulação à gravidade potencial da resposta incorreta. Diferentemente de trabalhos anteriores, centrados na prevalência, nas causas ou na dinâmica multi-turno do fenômeno, este TCC adota uma perspectiva orientada ao risco: além de medir quando um LLM cede à pressão, investiga se sua resistência aumenta conforme cresce a criticidade da consequência.
+---
 
 # Como usar este repositório
 

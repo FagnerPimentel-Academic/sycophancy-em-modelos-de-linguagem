@@ -1,14 +1,45 @@
 \chapter{CONCEITOS FUNDAMENTAIS} \label{conceitos}
 
-\todo[inline]{
-Neste capítulo você deve apresentar os principais conceitos que serão utilizados ao longo do trabalho. Comece descrevendo as palavras chaves que você utilizou no resumo deste trabalho. Em seguida descreva quais são os conceitos utilizados pelos autores que você encontrou na sessão dos trabalhos relacionados, caso estes conceitos já não estejam entre suas palavras chaves. Para cada conceito, defina:
-\\- O que é?
-\\- Quem definiu pela primeira vez?
-\\- Para que serve?
-\\- Quais as limitações?
-}
+Este capítulo apresenta os conceitos usados ao longo do trabalho, a partir das palavras-chave do resumo e dos termos empregados nos trabalhos relacionados. Para cada conceito, são apresentados sua definição, sua origem, sua finalidade e suas limitações.
 
-\section{Conceito 1\todo{alterar}}
-\section{Conceito 2\todo{alterar}}
-\section{Conceito 3\todo{alterar}}
-\section{Conceito 4\todo{alterar}}
+\section{Grandes Modelos de Linguagem}
+
+Grandes Modelos de Linguagem (LLMs) são modelos treinados em grandes volumes de texto para gerar respostas em linguagem natural. A base da maioria desses modelos é a arquitetura Transformer, proposta por \textcite{vaswani2017attention}, que usa mecanismos de atenção para relacionar as palavras de um texto. \textcite{brown2020language} mostraram, com o GPT-3, que ampliar a escala desses modelos permite que eles resolvam tarefas variadas a partir de poucas instruções ou exemplos.
+
+Hoje os LLMs já mediam decisões e a geração de conteúdo em diversas atividades. Sua principal limitação, para este trabalho, é que eles geram texto fluente sem verificar fatos: uma resposta bem escrita não é, necessariamente, uma resposta correta, e o modelo pode apresentar informações falsas com a mesma segurança de informações verdadeiras.
+
+\section{Alinhamento por preferências}
+
+O alinhamento por preferências é a etapa em que o modelo é ajustado para produzir respostas bem avaliadas por pessoas ou por modelos de preferência. A técnica mais conhecida é o RLHF (\textit{Reinforcement Learning from Human Feedback}), proposta por \textcite{christiano2017deep} e aplicada a modelos de linguagem por \textcite{ouyang2022training}, que a usaram para fazer o modelo seguir instruções de forma útil e cooperativa.
+
+A limitação dessa técnica é que ela otimiza o que os avaliadores preferem, e não necessariamente o que é verdadeiro. Como as avaliações às vezes favorecem respostas que concordam com o usuário em vez de respostas corretas, o processo pode criar uma tensão entre agradar o usuário e preservar a veracidade \cite{sharma2024towards}.
+
+\section{Sycophancy}
+
+\textit{Sycophancy} é a tendência de um modelo acomodar a crença ou a sugestão do usuário mesmo quando ela é incorreta. \textcite{perez2023discovering} fizeram uma das primeiras medições sistemáticas do fenômeno em LLMs, e \textcite{sharma2024towards} o relacionaram ao alinhamento por preferências. Em diálogos com múltiplos turnos, a pressão sustentada do usuário pode levar o modelo a abandonar uma resposta correta e mudar de posição \cite{hong2025measuring}.
+
+Medir a \textit{sycophancy} serve para avaliar a confiabilidade de um modelo quando o usuário discorda dele. A principal limitação do conceito é que nem toda mudança de posição é sicofântica: se o usuário aponta um erro real, mudar de resposta é o comportamento correto. Por isso, o fenômeno precisa ser medido junto com a correção seletiva.
+
+\section{Capitulação e resistência}
+
+Após uma resposta inicialmente correta, o modelo \textbf{resiste à sugestão falsa} quando preserva o acerto e \textbf{capitula}, no recorte proposto neste trabalho, quando passa a endossar a alternativa incorreta sugerida pelo usuário. Uma mudança para outra alternativa errada será classificada como degradação factual, sem constituir automaticamente capitulação específica. Incerteza, recusa e ambiguidade terão tratamento próprio na rubrica proposta.
+
+\textcite{hong2025measuring} propuseram o \textit{Turn of Flip} e o \textit{Number of Flip} para acompanhar mudanças de posição em diálogos multi-turno. Neste trabalho, propõe-se registrar o primeiro turno de capitulação após acerto inicial, o estado final e a recuperação posterior. Essas medidas são adaptações, sem equivalência direta às métricas originais. Uma mudança de posição, por si só, não caracteriza erro factual ou capitulação.
+
+\section{Correção seletiva}
+
+A correção seletiva é a capacidade de o modelo aceitar sugestões válidas e rejeitar sugestões inválidas, separando a correção legítima da cessão indevida à pressão. \textcite{sinha2026sycobench} propôs medir esses dois comportamentos separadamente: manter uma resposta diante da pressão pode preservar tanto um acerto quanto um erro, de modo que resistência e aceitação de correções devem ser avaliadas em conjunto.
+
+Na avaliação factual proposta, essa distinção depende de gabarito independente e verificável. A capitulação será avaliada após acerto inicial, enquanto a aceitação de correção verdadeira será avaliada após erro real do modelo. As taxas terão populações elegíveis e denominadores distintos; uma eventual diferença entre elas não representará uma probabilidade individual de distinguir sugestões verdadeiras e falsas.
+
+\section{Criticidade e gravidade potencial}
+
+Neste trabalho, propõe-se examinar a criticidade como dimensão secundária exploratória, definida pela consequência plausível de agir com base em uma resposta incorreta em um cenário. A dificuldade da questão será registrada separadamente, e o domínio não determinará a criticidade. Severidade potencial, reversibilidade e contexto de uso são critérios candidatos para uma rubrica ainda a fundamentar e validar. Os níveis abaixo também são preliminares e dependem da avaliação do grupo e do orientador:
+
+\begin{itemize}
+    \item \textbf{Baixa}: consequências predominantemente informacionais ou facilmente reversíveis;
+    \item \textbf{Média}: impacto material significativo, mas tipicamente limitado ou reversível;
+    \item \textbf{Alta}: potencial plausível de dano grave, duradouro ou difícil de reverter.
+\end{itemize}
+
+A rubrica deverá explicitar critérios, exemplos-âncora e regras de resolução de divergências. Para reduzir a subjetividade, propõe-se que dois integrantes revisem independentemente a criticidade de cada cenário antes de observar as respostas dos LLMs. Esse procedimento ainda depende de aprovação e validação; a classificação expressará consequência potencial, sem representar dano real observado ou reconhecimento do risco pelo modelo.
