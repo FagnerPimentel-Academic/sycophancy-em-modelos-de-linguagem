@@ -22,24 +22,24 @@ Medir a \textit{sycophancy} serve para avaliar a confiabilidade de um modelo qua
 
 \section{Capitulação e resistência}
 
-Diante da pressão do usuário, o modelo pode ter dois comportamentos. Ele \textbf{resiste} quando mantém a evidência e corrige a premissa incorreta do usuário. Ele \textbf{capitula} quando muda de posição e valida a sugestão sem base. \textcite{hong2025measuring} caracterizaram a capitulação em diálogos multi-turno pelo turno em que ocorre a primeira mudança de posição (\textit{Turn of Flip}) e pelo número de mudanças ao longo do diálogo (\textit{Number of Flip}).
+Após uma resposta inicialmente correta, o modelo \textbf{resiste à sugestão falsa} quando preserva o acerto e \textbf{capitula}, no recorte proposto neste trabalho, quando passa a endossar a alternativa incorreta sugerida pelo usuário. Uma mudança para outra alternativa errada será classificada como degradação factual, sem constituir automaticamente capitulação específica. Incerteza, recusa e ambiguidade terão tratamento próprio na rubrica proposta.
 
-Essas medidas mostram não só se o modelo cede, mas quanto tempo ele resiste. Sua limitação é depender do critério usado para decidir o que conta como mudança de posição, especialmente quando o modelo responde de forma ambígua.
+\textcite{hong2025measuring} propuseram o \textit{Turn of Flip} e o \textit{Number of Flip} para acompanhar mudanças de posição em diálogos multi-turno. Neste trabalho, propõe-se registrar o primeiro turno de capitulação após acerto inicial, o estado final e a recuperação posterior. Essas medidas são adaptações, sem equivalência direta às métricas originais. Uma mudança de posição, por si só, não caracteriza erro factual ou capitulação.
 
 \section{Correção seletiva}
 
-A correção seletiva é a capacidade de o modelo aceitar sugestões válidas e rejeitar sugestões inválidas, separando a correção legítima da cessão indevida à pressão. \textcite{sinha2026sycobench} propôs medir esses dois comportamentos separadamente, já que um modelo que nunca muda de posição não é sicofântico, mas também não aceita correções.
+A correção seletiva é a capacidade de o modelo aceitar sugestões válidas e rejeitar sugestões inválidas, separando a correção legítima da cessão indevida à pressão. \textcite{sinha2026sycobench} propôs medir esses dois comportamentos separadamente: manter uma resposta diante da pressão pode preservar tanto um acerto quanto um erro, de modo que resistência e aceitação de correções devem ser avaliadas em conjunto.
 
-Para ser medida, a correção seletiva exige saber com certeza qual é a resposta correta de cada questão, o que limita sua aplicação a perguntas com resposta objetiva e verificável.
+Na avaliação factual proposta, essa distinção depende de gabarito independente e verificável. A capitulação será avaliada após acerto inicial, enquanto a aceitação de correção verdadeira será avaliada após erro real do modelo. As taxas terão populações elegíveis e denominadores distintos; uma eventual diferença entre elas não representará uma probabilidade individual de distinguir sugestões verdadeiras e falsas.
 
 \section{Criticidade e gravidade potencial}
 
-A criticidade indica o potencial de dano de uma resposta incorreta em um determinado domínio. A mesma concordância indevida pode ser um erro inofensivo em um domínio e uma orientação potencialmente prejudicial em outro. Neste trabalho, propõe-se uma definição própria de criticidade, inspirada na noção de gravidade usada em matrizes de risco. A classificação abaixo é preliminar e depende da avaliação do grupo e do orientador, conforme discutido na metodologia:
+Neste trabalho, propõe-se examinar a criticidade como dimensão secundária exploratória, definida pela consequência plausível de agir com base em uma resposta incorreta em um cenário. A dificuldade da questão será registrada separadamente, e o domínio não determinará a criticidade. Severidade potencial, reversibilidade e contexto de uso são critérios candidatos para uma rubrica ainda a fundamentar e validar. Os níveis abaixo também são preliminares e dependem da avaliação do grupo e do orientador:
 
 \begin{itemize}
-    \item \textbf{Baixa}: o erro é inofensivo (por exemplo, conhecimentos gerais);
-    \item \textbf{Média}: o erro pode causar prejuízo financeiro ou de direitos (por exemplo, finanças pessoais);
-    \item \textbf{Alta}: o erro pode causar risco físico (por exemplo, saúde e segurança).
+    \item \textbf{Baixa}: consequências predominantemente informacionais ou facilmente reversíveis;
+    \item \textbf{Média}: impacto material significativo, mas tipicamente limitado ou reversível;
+    \item \textbf{Alta}: potencial plausível de dano grave, duradouro ou difícil de reverter.
 \end{itemize}
 
-A limitação dessa classificação é ser subjetiva. Para reduzir esse efeito, propõe-se que dois integrantes revisem, de forma independente, a criticidade de cada cenário e discutam as divergências. Esse procedimento ainda depende de aprovação; a classificação não deve ser determinada apenas pelo domínio.
+A rubrica deverá explicitar critérios, exemplos-âncora e regras de resolução de divergências. Para reduzir a subjetividade, propõe-se que dois integrantes revisem independentemente a criticidade de cada cenário antes de observar as respostas dos LLMs. Esse procedimento ainda depende de aprovação e validação; a classificação expressará consequência potencial, sem representar dano real observado ou reconhecimento do risco pelo modelo.
