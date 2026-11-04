@@ -5,23 +5,23 @@ Grandes Modelos de Linguagem (LLMs, do inglês \textit{Large Language Models}) j
 
 Um dos comportamentos que surgem dessa tensão é a \textit{sycophancy}: a tendência de o modelo acomodar a crença ou a sugestão do usuário mesmo quando ela é incorreta \cite{perez2023discovering, sharma2024towards}. Em diálogos com múltiplos turnos, a pressão sustentada do usuário, como em ``Tem certeza? Acho que sua resposta está errada.'', pode induzir o modelo a abandonar uma resposta correta e mudar de posição \cite{hong2025measuring}. Diante dessa pressão, o modelo pode resistir, mantendo a evidência e corrigindo a premissa do usuário, ou capitular, mudando de posição e validando uma sugestão sem base.
 
-A motivação deste trabalho está na consequência dessa falha. Em domínios com diferentes níveis de criticidade, a mesma tendência de concordar pode variar de um erro inofensivo a uma orientação potencialmente prejudicial. Além disso, a fluência das respostas de um LLM pode mascarar a falha, já que uma concordância indevida costuma ser apresentada com a mesma segurança de uma resposta correta.
+A motivação deste trabalho está na consequência potencial dessa falha. Conforme o cenário e o uso da resposta, a mesma tendência de concordar pode variar de um erro informacional a uma orientação potencialmente prejudicial. Além disso, a fluência das respostas de um LLM pode mascarar a falha, já que uma concordância indevida costuma ser apresentada com a mesma segurança de uma resposta correta.
 
-Os quatro trabalhos selecionados como referências abordam avaliações comportamentais, efeitos de preferências humanas, dinâmica multi-turno e aceitação de correções válidas \cite{perez2023discovering, sharma2024towards, hong2025measuring, sinha2026sycobench}. Nesses estudos, a comparação não foi estruturada em torno de níveis de criticidade definidos pela consequência potencial da resposta incorreta em cada cenário. Este trabalho propõe investigar essa dimensão em conjunto com capitulação e correção seletiva. A contribuição pretendida é uma perspectiva de avaliação orientada à criticidade potencial, cuja delimitação perante a literatura mais ampla ainda requer revisão complementar.
+Os quatro trabalhos selecionados como referências abordam avaliações comportamentais, efeitos de preferências humanas, dinâmica multi-turno e aceitação de correções válidas \cite{perez2023discovering, sharma2024towards, hong2025measuring, sinha2026sycobench}. Nesses estudos, a comparação não foi estruturada em torno de níveis de criticidade definidos pela consequência potencial da resposta incorreta em cada cenário. Este trabalho propõe comparar capitulação factual e aceitação de correções verdadeiras em um protocolo comum, com seguimentos neutros para observar degradação e autocorreção sem sugestão. A criticidade potencial será uma dimensão secundária exploratória, caso esse recorte seja mantido; sua delimitação perante a literatura mais ampla ainda requer revisão complementar.
 
-A pergunta de pesquisa que orienta o trabalho é: quando, como e com que frequência um LLM troca a correção pela concordância, e quão grave pode ser essa falha?
+A pergunta de pesquisa que orienta o protocolo proposto é: com que frequência e em qual turno os LLMs passam a endossar uma sugestão falsa após um acerto inicial, e como esse comportamento se distingue da aceitação de correções verdadeiras após um erro real? A relação desses comportamentos com a criticidade potencial dos cenários será examinada de forma exploratória, caso o recorte seja mantido.
 
 \section{Objetivo}
 
-O objetivo geral deste trabalho é quantificar e comparar o comportamento de \textit{sycophancy} em diferentes LLMs sob pressão do usuário, avaliando capitulação, correção seletiva e gravidade potencial das falhas em cenários de diferentes níveis de criticidade.
+O objetivo geral proposto é quantificar e comparar a capitulação factual e a correção seletiva em diferentes LLMs, distinguindo a adoção de sugestões falsas após acerto inicial da aceitação de correções verdadeiras após erro real e examinando, de forma exploratória, sua relação com a criticidade potencial dos cenários.
 
-Para atingir esse objetivo, são definidos os seguintes objetivos específicos:
+Para atingir esse objetivo, propõem-se os seguintes objetivos específicos, sujeitos à avaliação do grupo e do orientador:
 
 \begin{itemize}
-    \item \textbf{Definir} um protocolo reproduzível de \textit{prompts} pareados (premissas corretas $\times$ incorretas) e níveis de pressão em diálogos com múltiplos turnos;
+    \item \textbf{Definir} um protocolo reproduzível com questões de gabarito verificável, respostas iniciais reais e continuações independentes de intervenção e controle neutro, conforme a elegibilidade de cada resposta;
     \item \textbf{Executar} os testes em diferentes LLMs sob configurações padronizadas, registrando respostas e condições experimentais para permitir a comparação;
-    \item \textbf{Mensurar} a taxa de capitulação, o turno da primeira mudança, a frequência de mudanças e a correção seletiva diante de sugestões válidas e inválidas;
-    \item \textbf{Comparar} modelos, domínios e níveis de criticidade, relacionando a frequência de capitulação à gravidade potencial da resposta incorreta e identificando os cenários de maior risco.
+    \item \textbf{Mensurar} acurácia inicial, capitulação específica, degradação factual, aceitação de correções verdadeiras e trajetória das respostas, com populações elegíveis e denominadores explícitos;
+    \item \textbf{Comparar} os modelos nas intervenções e nos controles correspondentes, considerando as diferenças entre conjuntos elegíveis e explorando a criticidade por cenário quando sua rubrica estiver fundamentada e validada.
 \end{itemize}
 
 \section{Estrutura do Trabalho}

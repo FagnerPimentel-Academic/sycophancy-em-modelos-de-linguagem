@@ -1,26 +1,59 @@
 \chapter{Cronograma}
 
-Este cronograma é preliminar e depende da aprovação do desenho experimental pelo grupo e pelo orientador. As quantidades e os modelos mencionados são opções de planejamento descritas na metodologia, não decisões aprovadas.
+Este cronograma é uma \textbf{proposta para o TCC II}, condicionada à avaliação do grupo e do orientador. M1 a M6 representam seis blocos mensais relativos de planejamento, a contar do início autorizado do trabalho; não são datas oficiais da FEI. O calendário efetivo, os responsáveis e os marcos de entrega deverão ser confirmados.
 
-Descrição das atividades previstas:
+As atividades previstas são:
 \begin{itemize}
-    \item \textbf{Atividade 1: Definição do protocolo.} Elaborar as questões (60 como estimativa inicial) de múltipla escolha, com as fontes das respostas corretas, os níveis de pressão e a classificação dos domínios por criticidade.
-    \item \textbf{Atividade 2: Execução dos testes.} Desenvolver o \textit{script} em Python, aplicar o protocolo aos LLMs selecionados (quatro como proposta inicial) sob configurações padronizadas e registrar as respostas e as condições experimentais.
-    \item \textbf{Atividade 3: Mensuração e comparação.} Revisar as respostas ambíguas, calcular as métricas, aplicar os testes estatísticos e comparar os resultados entre modelos, domínios e níveis de criticidade.
-    \item \textbf{Atividade 4: Redação e defesa.} Escrever os capítulos de resultados e conclusão e preparar a apresentação final.
+    \item \textbf{Preparação dos cenários:} revisar fontes, gabaritos, distratores, domínio, dificuldade e rubrica de criticidade, antes de observar respostas; preparar 18 questões de piloto separadas das 90 candidatas da principal.
+    \item \textbf{Implementação:} construir clientes de API, históricos independentes, logs, parser e cálculos; verificar casos controlados sem confundi-los com dados empíricos; confirmar acesso, versões e orçamento.
+    \item \textbf{Piloto:} executar a rodada identificada, medir elegibilidade, completude, custo, tempo de anotação, variabilidade e concordância; seu resultado orientará a revisão da escala candidata de três modelos, dois seguimentos e duas repetições.
+    \item \textbf{Revisão do protocolo:} corrigir problemas do piloto, repetir verificações afetadas e submeter a versão da principal ao grupo e ao orientador; congelar itens, prompts, exclusões e análise antes da coleta.
+    \item \textbf{Coleta principal:} executar somente após o marco anterior, monitorando versão, falhas e teto de gasto, sem interromper ramos apenas por capitulação antecipada.
+    \item \textbf{Anotação:} realizar revisão independente, medir concordância antes da adjudicação e manter os rótulos originais; separar a amostra aleatória da revisão dirigida.
+    \item \textbf{Análise:} calcular taxas, coberturas, limites para indeterminados e contrastes pareados, com agrupamento por questão-base; tratar criticidade e comparações entre modelos como exploratórias.
+    \item \textbf{Redação e apresentação de TCC II:} manter escrita e revisão ao longo do semestre, concluir discussão e limitações após a análise e preparar a defesa no prazo institucional confirmado.
 \end{itemize}
 
 \begin{table}[ht]
-\caption{Cronograma de execução do projeto.}
+\caption{Cronograma candidato por blocos mensais relativos e entregas verificáveis. Fonte: elaboração própria.}
 \label{tab:cronograma}
 \resizebox{\textwidth}{!}{
 \begin{tabular}{|l|c|c|c|c|c|c|}
 \hline
-Atividade / Mês & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
-Atividade 1 & \gray & \gray &  &  &  & \\ \hline
-Atividade 2 &  & \gray & \gray &  &  & \\ \hline
-Atividade 3 &  &  & \gray & \gray & \gray & \\ \hline
-Atividade 4 &  &  &  & \gray & \gray & \gray \\ \hline
+Atividade / Bloco & M1 & M2 & M3 & M4 & M5 & M6 \\ \hline
+Cenários e gabaritos revisados & \gray & \gray & & & & \\ \hline
+Implementação e verificações & \gray & \gray & & & & \\ \hline
+Piloto e custo mensurado & & \gray & & & & \\ \hline
+Protocolo principal revisado e aprovado & & \gray & \gray & & & \\ \hline
+Coleta principal registrada & & & \gray & \gray & & \\ \hline
+Anotação e adjudicação concluídas & & & \gray & \gray & \gray & \\ \hline
+Análise reproduzível & & & & \gray & \gray & \\ \hline
+Redação, revisão e defesa & \gray & \gray & \gray & \gray & \gray & \gray \\ \hline
 \end{tabular}
 }
 \end{table}
+
+O marco ``aprovado'' na tabela representa uma \emph{condição futura de início}, não aprovação já obtida. A anotação poderá acompanhar lotes concluídos da principal, mas alterações de parser, gabarito ou rubrica exigirão revisão consistente de todos os casos afetados. M6 reserva margem para redação e imprevistos. Se o calendário disponibilizar menos blocos, implementação e curadoria poderão ocorrer em paralelo; a simplificação prioritária será reduzir estratificações exploratórias, preservando controles e validação do desfecho principal.
+
+\section{Riscos e medidas de mitigação}
+\label{sec:riscos-viabilidade}
+Os riscos abaixo são previstos para planejamento; suas probabilidades ainda não foram estimadas. A viabilidade depende de medir acesso, custo e tempo no piloto, e não apenas da quantidade nominal de chamadas.
+
+\begin{table}[htbp]
+\centering
+\caption{Riscos do desenho candidato e respostas previstas. Fonte: elaboração própria.}
+\label{tab:riscos-tcc2}
+\begin{tabular}{|p{0.22\linewidth}|p{0.65\linewidth}|}
+\hline
+Risco & Gatilho e mitigação proposta \\ \hline
+Acesso, cotas ou troca de modelo & Conferir acesso antes do piloto; se houver descontinuação, substituir e validar antes da principal. Separar versões alteradas durante a coleta. \\ \hline
+Custo de APIs & Medir tokens e retries no piloto; recalcular projeção aos 80\% do teto financeiro e interromper novas chamadas no limite. Reduzir escopo exploratório antes de retirar controles. \\ \hline
+Poucos casos elegíveis & Projetar questões inicialmente corretas e erradas por modelo. Se insuficientes, revisar dificuldade do conjunto comum antes da principal ou limitar a análise complementar; nunca inserir erros artificiais. \\ \hline
+Divergência entre avaliadores & Aplicar calibração e metas candidatas de concordância; revisar rubrica e repetir o piloto afetado. Preservar rótulos independentes e adjudicação. \\ \hline
+Erros do parser ou recusas & Revisar saídas não conformes, validar em amostra aleatória e informar cobertura e indeterminados. Não converter falha de extração em capitulação. \\ \hline
+Rubrica de criticidade frágil & Revisar consequências antes das respostas; se as classes não forem defensáveis, manter criticidade descritiva e não prometer efeito independente de domínio ou dificuldade. \\ \hline
+Carga de anotação e prazo & Medir tempo por item no piloto, considerar revisão dirigida até cobertura integral e preservar margem final. Se não couber, reduzir o desenho antes de congelar a coleta, com justificativa. \\ \hline
+\end{tabular}
+\end{table}
+
+Nenhum desses planos autoriza coleta principal sem aprovação ou produz uma decisão metodológica definitiva. A infraestrutura por API evita exigir GPU local, mas licenças, financiamento, cotas, requisitos éticos e calendário continuam como condições de viabilidade a confirmar.
