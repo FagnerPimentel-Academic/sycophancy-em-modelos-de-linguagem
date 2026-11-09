@@ -1,9 +1,14 @@
-@book{jalongo2016writing,
-  title={Writing for publication},
-  author={Jalongo, Mary Renck and Saracho, Olivia N},
-  year={2016},
-  publisher={Springer}
-}
+% =============================================================================
+% Referências do TCC — revisão bibliográfica de 07/11/2026
+% Metadados conferidos nas páginas oficiais (ACL Anthology, NeurIPS proceedings,
+% PDF publicado da ICLR) ou no DOI. Detalhes da verificação:
+%   docs/referencias/VERIFICACAO_REFERENCIAS_2026-11-07.md
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+% Referências citadas no texto atual
+% -----------------------------------------------------------------------------
+
 @inproceedings{perez2023discovering,
   title     = {Discovering Language Model Behaviors with Model-Written Evaluations},
   author    = {Perez, Ethan and Ringer, Sam and Lukosiute, Kamile and Nguyen, Karina and Chen, Edwin and others},
@@ -18,9 +23,11 @@
   url       = {https://aclanthology.org/2023.findings-acl.847}
 }
 
+% Sem DOI da conferência (ICLR). O DOI 10.48550/arXiv.2310.13548 é do preprint e não deve ser usado aqui.
+% Lista de autores conferida na primeira página do PDF publicado.
 @inproceedings{sharma2024towards,
   title     = {Towards Understanding Sycophancy in Language Models},
-  author    = {Sharma, Mrinank and Tong, Meg and Korbak, Tomasz and Duvenaud, David and Askell, Amanda and Bowman, Samuel R. and others},
+  author    = {Sharma, Mrinank and Tong, Meg and Korbak, Tomasz and Duvenaud, David and Askell, Amanda and Bowman, Samuel R. and Cheng, Newton and Durmus, Esin and Hatfield-Dodds, Zac and Johnston, Scott R. and Kravec, Shauna and Maxwell, Timothy and McCandlish, Sam and Ndousse, Kamal and Rausch, Oliver and Schiefer, Nicholas and Yan, Da and Zhang, Miranda and Perez, Ethan},
   booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
   year      = {2024},
   address   = {Vienna, Austria},
@@ -52,6 +59,7 @@
   address   = {San Diego, California, United States},
   publisher = {Association for Computational Linguistics},
   isbn      = {979-8-89176-395-1},
+  doi       = {10.18653/v1/2026.findings-acl.1759},
   url       = {https://aclanthology.org/2026.findings-acl.1759}
 }
 
@@ -59,34 +67,217 @@
   title     = {Attention Is All You Need},
   author    = {Vaswani, Ashish and Shazeer, Noam and Parmar, Niki and Uszkoreit, Jakob and Jones, Llion and Gomez, Aidan N. and Kaiser, Lukasz and Polosukhin, Illia},
   booktitle = {Advances in Neural Information Processing Systems 30 (NIPS 2017)},
+  volume    = {30},
   pages     = {5998--6008},
   year      = {2017},
-  url       = {https://arxiv.org/abs/1706.03762}
+  url       = {https://papers.nips.cc/paper_files/paper/2017/hash/3f5ee243547dee91fbd053c1c4a845aa-Abstract.html}
 }
 
 @inproceedings{brown2020language,
   title     = {Language Models are Few-Shot Learners},
   author    = {Brown, Tom B. and Mann, Benjamin and Ryder, Nick and Subbiah, Melanie and Kaplan, Jared and others},
   booktitle = {Advances in Neural Information Processing Systems 33 (NeurIPS 2020)},
+  volume    = {33},
   pages     = {1877--1901},
   year      = {2020},
-  url       = {https://arxiv.org/abs/2005.14165}
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html}
 }
 
 @inproceedings{christiano2017deep,
   title     = {Deep Reinforcement Learning from Human Preferences},
   author    = {Christiano, Paul F. and Leike, Jan and Brown, Tom B. and Martic, Miljan and Legg, Shane and Amodei, Dario},
   booktitle = {Advances in Neural Information Processing Systems 30 (NIPS 2017)},
+  volume    = {30},
   pages     = {4299--4307},
   year      = {2017},
-  url       = {https://arxiv.org/abs/1706.03741}
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2017/hash/d5e2c0adad503c91f91df240d0cd4e49-Abstract.html}
 }
 
 @inproceedings{ouyang2022training,
   title     = {Training Language Models to Follow Instructions with Human Feedback},
-  author    = {Ouyang, Long and Wu, Jeff and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll L. and others},
+  author    = {Ouyang, Long and Wu, Jeffrey and Jiang, Xu and Almeida, Diogo and Wainwright, Carroll L. and others},
   booktitle = {Advances in Neural Information Processing Systems 35 (NeurIPS 2022)},
+  volume    = {35},
   pages     = {27730--27744},
   year      = {2022},
-  url       = {https://arxiv.org/abs/2203.02155}
+  doi       = {10.52202/068431-2011},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2022/hash/b1efde53be364a73914f58805a001731-Abstract.html}
+}
+
+% -----------------------------------------------------------------------------
+% Referências candidatas para o TCC II — ainda NÃO citadas no texto.
+% O biblatex só imprime o que for citado; estas entradas não aparecem no PDF.
+% Antes de citar: ler o original e anotar seção/página (protocolo 01).
+% -----------------------------------------------------------------------------
+
+@inproceedings{xie2024askagain,
+  title     = {Ask Again, Then Fail: Large Language Models' Vacillations in Judgment},
+  author    = {Xie, Qiming and Wang, Zengzhi and Feng, Yi and Xia, Rui},
+  booktitle = {Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages     = {10709--10745},
+  year      = {2024},
+  month     = aug,
+  address   = {Bangkok, Thailand},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2024.acl-long.577},
+  url       = {https://aclanthology.org/2024.acl-long.577}
+}
+
+@inproceedings{maraia2026sounding,
+  title     = {Sounding vs. Being an Expert: Disentangling Authority, Register and Cultural Impact in Sycophantic {LLMs}},
+  author    = {Maraia, Gabriele and Zanzotto, Fabio Massimo and Ranaldi, Leonardo},
+  booktitle = {Findings of the Association for Computational Linguistics: ACL 2026},
+  pages     = {32492--32508},
+  year      = {2026},
+  month     = jul,
+  address   = {San Diego, California, United States},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2026.findings-acl.1627},
+  url       = {https://aclanthology.org/2026.findings-acl.1627}
+}
+
+% Preprint (arXiv). Conferir se há versão publicada antes de citar.
+@misc{laban2024flipflop,
+  title         = {Are You Sure? Challenging {LLMs} Leads to Performance Drops in The {FlipFlop} Experiment},
+  author        = {Laban, Philippe and Murakhovs'ka, Lidiya and Xiong, Caiming and Wu, Chien-Sheng},
+  year          = {2024},
+  eprint        = {2311.08596},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  doi           = {10.48550/arXiv.2311.08596},
+  note          = {Preprint arXiv, versão 2},
+  url           = {https://arxiv.org/abs/2311.08596}
+}
+
+% PENDENTE: páginas 893--900 indicadas pela auditoria do GPT não foram conferidas (página da AAAI bloqueou acesso automático).
+@inproceedings{fanous2025syceval,
+  title     = {{SycEval}: Evaluating {LLM} Sycophancy},
+  author    = {Fanous, Aaron and Goldberg, Jacob and Agarwal, Ank and Lin, Joanna and Zhou, Anson and Xu, Sonnet and Bikia, Vasiliki and Daneshjou, Roxana and Koyejo, Sanmi},
+  booktitle = {Proceedings of the AAAI/ACM Conference on AI, Ethics, and Society (AIES)},
+  volume    = {8},
+  number    = {1},
+  year      = {2025},
+  doi       = {10.1609/aies.v8i1.36598},
+  url       = {https://ojs.aaai.org/index.php/AIES/article/view/36598}
+}
+
+% PENDENTE: conferir a lista completa de autores na página do artigo.
+@article{chen2025helpfulness,
+  title   = {When helpfulness backfires: {LLMs} and the risk of false medical information due to sycophantic behavior},
+  author  = {Chen, Shan and others},
+  journal = {npj Digital Medicine},
+  volume  = {8},
+  pages   = {605},
+  year    = {2025},
+  doi     = {10.1038/s41746-025-02008-z},
+  url     = {https://www.nature.com/articles/s41746-025-02008-z}
+}
+
+@inproceedings{zheng2024selectors,
+  title     = {Large Language Models Are Not Robust Multiple Choice Selectors},
+  author    = {Zheng, Chujie and Zhou, Hao and Meng, Fandong and Zhou, Jie and Huang, Minlie},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  url       = {https://proceedings.iclr.cc/paper_files/paper/2024/hash/54dd9e0cff6d9214e20d97eb2a3bae49-Abstract-Conference.html}
+}
+
+% Preprint (arXiv).
+@misc{atil2024nondeterminism,
+  title         = {Non-Determinism of ``Deterministic'' {LLM} Settings},
+  author        = {Atil, Berk and Aykent, Sarp and Chittams, Alexa and others},
+  year          = {2024},
+  eprint        = {2408.04667},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  note          = {Preprint arXiv},
+  url           = {https://arxiv.org/abs/2408.04667}
+}
+
+% Preprint (arXiv).
+@misc{aldahlawi2026language,
+  title         = {Investigating the Influence of Language on Sycophantic Behavior of Multilingual {LLMs}},
+  author        = {Aldahlawi, Bayan Abdullah and Rahman, A. B. M. Ashikur and Ahmad, Irfan},
+  year          = {2026},
+  eprint        = {2603.27664},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  note          = {Preprint arXiv},
+  url           = {https://arxiv.org/abs/2603.27664}
+}
+
+% Preprint (arXiv). PENDENTE: conferir a lista completa de autores.
+@misc{shah2026multilingual,
+  title         = {Sycophancy as a Multilingual Alignment Failure: How Safety Degrades Across Languages, Topics, and Models},
+  author        = {Shah, Arya and Beniwal, Himanshu and others},
+  year          = {2026},
+  eprint        = {2606.08451},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  note          = {Preprint arXiv},
+  url           = {https://arxiv.org/abs/2606.08451}
+}
+
+% Preprint (arXiv).
+@misc{wei2023synthetic,
+  title         = {Simple Synthetic Data Reduces Sycophancy in Large Language Models},
+  author        = {Wei, Jerry and Huang, Da and Lu, Yifeng and Zhou, Denny and Le, Quoc V.},
+  year          = {2023},
+  eprint        = {2308.03958},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CL},
+  note          = {Preprint arXiv},
+  url           = {https://arxiv.org/abs/2308.03958}
+}
+
+@inproceedings{mekala2025quantization,
+  title     = {Does quantization affect models' performance on long-context tasks?},
+  author    = {Mekala, Anmol and Atmakuru, Anirudh and Song, Yixiao and Karpinska, Marzena and Iyyer, Mohit},
+  booktitle = {Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing},
+  pages     = {9422--9470},
+  year      = {2025},
+  publisher = {Association for Computational Linguistics},
+  doi       = {10.18653/v1/2025.emnlp-main.479},
+  url       = {https://aclanthology.org/2025.emnlp-main.479}
+}
+
+@article{field2007bootstrapping,
+  title   = {Bootstrapping clustered data},
+  author  = {Field, C. A. and Welsh, A. H.},
+  journal = {Journal of the Royal Statistical Society: Series B (Statistical Methodology)},
+  volume  = {69},
+  number  = {3},
+  pages   = {369--390},
+  year    = {2007},
+  doi     = {10.1111/j.1467-9868.2007.00593.x}
+}
+
+@article{landis1977agreement,
+  title   = {The Measurement of Observer Agreement for Categorical Data},
+  author  = {Landis, J. Richard and Koch, Gary G.},
+  journal = {Biometrics},
+  volume  = {33},
+  number  = {1},
+  pages   = {159--174},
+  year    = {1977},
+  doi     = {10.2307/2529310}
+}
+
+@article{mchugh2012kappa,
+  title   = {Interrater reliability: the kappa statistic},
+  author  = {McHugh, Mary L.},
+  journal = {Biochemia Medica},
+  volume  = {22},
+  number  = {3},
+  pages   = {276--282},
+  year    = {2012},
+  doi     = {10.11613/BM.2012.031}
+}
+
+@techreport{nist2023airmf,
+  title       = {Artificial Intelligence Risk Management Framework ({AI RMF} 1.0)},
+  author      = {{National Institute of Standards and Technology}},
+  institution = {National Institute of Standards and Technology},
+  number      = {NIST AI 100-1},
+  year        = {2023},
+  doi         = {10.6028/NIST.AI.100-1}
 }
